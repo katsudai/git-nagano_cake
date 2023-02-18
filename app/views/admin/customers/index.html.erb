@@ -1,2 +1,51 @@
-<h1>Admin::Customers#index</h1>
-<p>Find me in app/views/admin/customers/index.html.erb</p>
+<div class="container">
+    
+  <div class="row">
+    <div class="alert alert-info my-3" role="alert">
+      <h3>会員一覧</h3>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-sm-12">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col", class="table-info">会員ID</th>
+            <th scope="col", class="table-info">氏名</th>
+            <th scope="col", class="table-info"></th>
+            <th scope="col", class="table-info"></th>
+            <th scope="col", class="table-info">メールアドレス</th>
+            <th scope="col", class="table-info">ステータス</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @customers.each do |customer| %>
+          <tr>
+            <td><%= customer.id %></td>
+            <td>
+              <%= link_to customer.last_name, admin_customer_path(customer), class: "text-decoration-none text-dark border-bottom border-dark" %>
+              <%= link_to customer.first_name, admin_customer_path(customer), class: "text-decoration-none text-dark border-bottom border-dark" %>
+            </td>
+            <td></td>
+            <td></td>
+            <td><%= customer.email %></td>
+            <td class="text-success font-weight-bold">
+              <% if customer.is_deleted == false %>
+                <div class="text-success font-weight-bold">
+                  有効
+                </div>
+              <% else %>
+                <div class="text-secondary font-weight-bold">
+                  無効
+                </div>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+        <%= paginate @customers %>
+      </table>
+    </div>
+  </div>
+</div>

@@ -2,9 +2,11 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto text-center shadow-lg rounded px-0 my-5">
+      
       <div class="alert alert-info mb-3" role="alert">
         <h3>管理者ログイン</h3>
       </div>
+      
       <div class="form-body p-4">
         <%= form_with model: @admin, url: admin_session_path do |f| %>
           <div class="input-group flex-nowrap my-4">

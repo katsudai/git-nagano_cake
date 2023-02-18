@@ -1,0 +1,43 @@
+<div class="container">
+    
+  <div class="row">
+    <div class="alert alert-info my-3" role="alert">
+      <h3>注文履歴一覧</h3>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-sm-12">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col", class="table-info">購入日時</th>
+            <th scope="col", class="table-info">購入者</th>
+            <th scope="col", class="table-info"></th>
+            <th scope="col", class="table-info"></th>
+            <th scope="col", class="table-info">注文個数</th>
+            <th scope="col", class="table-info">注文ステータス</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @orders.each do |order| %>
+          <tr>
+            <td><%= order.created_at.strftime('%Y/%m/%d') %></td>
+            <td>
+              <%= link_to order.customer.last_name, admin_customer_path(customer), class: "text-decoration-none text-dark border-bottom border-dark" %>
+              <%= link_to order.customer.first_name, admin_customer_path(customer), class: "text-decoration-none text-dark border-bottom border-dark" %>
+            </td>
+            <td></td>
+            <td></td>
+            <td><%= order.order_details.amount %></td>
+            <td class="text-success font-weight-bold">
+              <%= order.order_status %>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+        <%= paginate @orders %>
+      </table>
+    </div>
+  </div>
+</div>

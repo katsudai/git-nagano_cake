@@ -1,2 +1,67 @@
-<h1>Admin::Customers#show</h1>
-<p>Find me in app/views/admin/customers/show.html.erb</p>
+<div class="container">
+  
+  <div class="row">
+    <div class="alert alert-info my-3" role="alert">
+      <h3>会員詳細</h3>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-sm-12 mt-4">
+      <table class="table">
+        <tbody>
+          <tr>
+            <td>会員ID</td>
+            <td><%= @customer.id %></td>
+          </tr>
+          <tr>
+            <td>氏名</td>
+            <td><%= @customer.last_name %><%= @customer.first_name %></td>
+          </tr>
+          <tr>
+            <td>フリガナ</td>
+            <td><%= @customer.last_name_kana %><%= @customer.first_name_kana %></td>
+          </tr>
+          <tr>
+            <td>郵便番号</td>
+            <td><%= @customer.postal_code %></td>
+          </tr>
+          <tr>
+            <td>住所</td>
+            <td><%= @customer.address %></td>
+          </tr>
+          <tr>
+            <td>電話番号</td>
+            <td><%= @customer.telephone_number %></td>
+          </tr>
+          <tr>
+            <td>メールアドレス</td>
+            <td><%= @customer.email %></td>
+          </tr>
+          <tr>
+            <td>会員ステータス</td>  
+            <td class="text-success font-weight-bold">
+              <% if @customer.is_deleted == false %>
+                <div class="text-success font-weight-bold">
+                  有効
+                </div>
+              <% else %>
+                <div class="text-secondary font-weight-bold">
+                  無効
+                </div>
+              <% end %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6 text-right">
+      <span class=""><%= link_to "編集する", edit_admin_customer_path(@customer), class: "btn btn-success btn-lg" %></span>
+    </div>
+    <div class="col-sm-6">
+      <span><%= link_to "注文履歴一覧を見る", admin_orders_path, class: "btn btn-primary btn-lg" %></span>
+    </div>
+  </div>
+</div>

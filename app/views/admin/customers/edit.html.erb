@@ -1,2 +1,17 @@
-<h1>Admin::Customers#edit</h1>
-<p>Find me in app/views/admin/customers/edit.html.erb</p>
+<p id="notice"></p>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-8 col-lg-8 px-4 px-sm-0 mx-auto text-center">
+      <div class="alert alert-info mb-3" role="alert">
+        <h3>商品編集</h3>
+      </div>
+      
+      <%= form_with model: @customer, url: admin_customer_path, method: :PATCH do |f| %>
+      
+      <div class="text-center">
+        <%= f.submit "変更を保存", class: "btn btn-success btn-lg" %>
+      </div>
+      <% end %>
+    </div>  
+  </div>
+</div>
