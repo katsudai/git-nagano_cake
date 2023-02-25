@@ -9,6 +9,7 @@ class CreateOrders < ActiveRecord::Migration[6.1]
       t.integer :total_payment
       t.integer :payment_method, null: false, default: 0
       t.integer :status, null: false, default: 0
+      t.integer :customer_id
       
       t.timestamps
     end

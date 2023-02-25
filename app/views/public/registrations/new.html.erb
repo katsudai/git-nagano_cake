@@ -1,7 +1,7 @@
 <p id="notice"></p>
 <div class="container">
   <div class="row">
-    <div class="col-sm-12 col-md-10 col-lg-8 px-5 px-sm-0 mx-auto text-center shadow-lg rounded px-0 my-5">
+    <div class="col-sm-12 col-md-10 col-lg-10 px-5 px-sm-0 mx-auto text-center shadow-lg rounded px-0 my-3">
       
       <div class="alert alert-info mb-3" role="alert">
         <h3>新規会員登録</h3>
@@ -14,45 +14,45 @@
         <div class="input-group flex-nowrap mb-4">
           <label class="form-label mb-0 col-3">氏名</label>
           <span class="input-group-text"><i class="fas fa-plus"></i></span>
-          <%= f.text_field :last_name, autofocus: true, autocomplete: "last_name", placeholder: "名字" %>
-          <%= f.text_field :first_name, autofocus: true, autocomplete: "first_name", placeholder: "名前" %>
+          (性)<%= f.text_field :last_name, autofocus: true, autocomplete: "last_name", placeholder: "令和", class: "col-2 pl-1" %>
+          (名)<%= f.text_field :first_name, autofocus: true, autocomplete: "first_name", placeholder: "道子", class: "col-2 pl-1" %>
         </div>
         
         <div class="input-group flex-nowrap mb-4">
           <label class="form-label mb-0 col-3">フリガナ</label>
           <span class="input-group-text"><i class="fas fa-plus"></i></span>
-          <%= f.text_field :last_name_kana, autofocus: true, autocomplete: "last_name_kana" %>
-          <%= f.text_field :first_name_kana, autofocus: true, autocomplete: "first_name_kana" %>
+          (セイ)<%= f.text_field :last_name_kana, autofocus: true, autocomplete: "last_name_kana", class: "col-2 pl-1" %>
+          (メイ)<%= f.text_field :first_name_kana, autofocus: true, autocomplete: "first_name_kana", class: "col-2 pl-1" %>
         </div>
         
         <div class="input-group flex-nowrap mb-4">
           <label class="form-label mb-0 col-3">郵便番号</label>
           <span class="input-group-text"><i class="fas fa-plus"></i></span>
-          <%= f.text_field :postal_code, autofocus: true, autocomplete: "postal_code", class: "col-7" %>
+          <%= f.text_field :postal_code, autofocus: true, autocomplete: "postal_code", class: "col-5" %>
         </div>
         
         <div class="input-group flex-nowrap mb-4">
           <label class="form-label mb-0 col-3">住所</label>
           <span class="input-group-text"><i class="fas fa-plus"></i></span>
-          <%= f.text_field :address, autofocus: true, autocomplete: "address", class: "col-7" %>
+          <%= f.text_field :address, autofocus: true, autocomplete: "address", class: "col-5" %>
         </div>
         
         <div class="input-group flex-nowrap mb-4">
           <label class="form-label mb-0 col-3">電話番号</label>
           <span class="input-group-text"><i class="fas fa-plus"></i></span>
-          <%= f.text_field :telephone_number, autofocus: true, autocomplete: "telephone_number", class: "col-7" %>
+          <%= f.text_field :telephone_number, autofocus: true, autocomplete: "telephone_number", class: "col-5" %>
         </div>
         
         <div class="input-group flex-nowrap mb-4">
           <label class="form-label mb-0 col-3">メールアドレス</label>
           <span class="input-group-text"><i class="fas fa-plus"></i></span>
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "col-7" %>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "col-5" %>
         </div>
         
         <div class="input-group flex-nowrap">
           <label class="form-label mb-0 col-3">パスワード</label>
           <span class="input-group-text"><i class="fas fa-plus"></i></span>
-          <%= f.password_field :password, autocomplete: "new-password", class: "col-7" %>
+          <%= f.password_field :password, autocomplete: "new-password", class: "col-5" %>
         </div>
         <div class="input-group flex-nowrap mb-4">
           <% if @minimum_password_length %>
@@ -63,7 +63,7 @@
         <div class="input-group flex-nowrap mb-4">
           <label class="form-label mb-0 col-3">パスワード確認</label>
           <span class="input-group-text"><i class="fas fa-plus"></i></span>
-          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "col-7" %>
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "col-5" %>
         </div>
       </div>
       <div class="text-center mb-4">
@@ -74,4 +74,11 @@
       <% render "public/shared/links" %>
     </div>
   </div>
+  <div class="col-4 alert alert-info mb-3 text-center my-3" role="alert">
+    <h6>既に登録済の方</h6>
+  </div>
+  <p>
+    <%= link_to "こちら", new_customer_session_path %>
+    からログインしてください。
+  </p>
 </div>

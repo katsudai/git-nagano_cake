@@ -1,2 +1,53 @@
-<h1>Public::Homes#top</h1>
-<p>Find me in app/views/public/homes/top.html.erb</p>
+<p id="notice"></p>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-8 col-lg-10 px-4 px-sm-0 mx-auto text-center">
+      <div class="img1">
+        <div class="overlay bg-black opacity-04"></div>
+        <div class="container">
+          <div class="wt-bnr-inr-entry">
+            <h2 class="mt-5  mx-5 text-info">
+              ようこそ、ながのCAKEへ</br>
+              このサイトはケーキ販売のECサイトになります。</br>
+              会員でない方も商品の閲覧はできますが、</br>
+              購入には会員登録が必要になります。
+            </h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row pt-4">
+    <h1>新着商品</h1>
+  </div>
+  
+  
+  <div class="row">
+    <% @items.each do |item| %>
+    <div class="col-md-3 font-weight-bold">
+      <%= link_to item_path(item.id) ,style: "color: black;", data: {"turbolinks" => false} do %>
+        <% if item.image.attached? %>
+      　<%= image_tag item.image, size: "200x200" %>
+    　　<% else %>
+    　　<%= image_tag 'no_image', size: "200x200" %>
+    　　<% end %>
+    　<% end %>
+    　<div>
+    　　<%= item.name %>
+    　</div>
+    　<div>
+  　　    <%= item.price %>円
+  　　</div>
+    </div>
+    <% end %>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-10"></div>
+    <div class="col-2 pt-2 link-dark">
+      <p class="font-weight-bold"><%= link_to "全ての商品を見る＞", items_path %></p>
+    </div>
+  </div>
+</div>

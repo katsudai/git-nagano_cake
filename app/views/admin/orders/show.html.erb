@@ -2,38 +2,107 @@
     
   <div class="row">
     <div class="alert alert-info my-3" role="alert">
-        <% @orders.each do |order| %>
-      <h3><%= order.customer.last_name %><%= order.customer.first_name %>さんの注文履歴</h3>
+      <h3>注文履歴詳細</h3>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 mt-4">
+      <table class="table">
+        <tbody>
+          <tr>
+            <td>購入者</td>
+            <td>
+              <%= @order.customer.last_name %><%= order.customer.first_name %>
+            </td>
+          </tr>
+          <tr>
+            <td>注文日</td>
+            <td><%= @order.created_at.strftime('%Y/%m/%d') %></td>
+          </tr>
+          <tr>
+            <td>配送先</td>
+            <td><%= @order.postalcode %><%= order.address %></br><%= order.name %></td>
+          </tr>
+          <tr>
+            <td>支払方法</td>
+            <td><%= @order.payment_method %></td>
+          </tr>
+          <tr>
+            <td>注文ステータス</td>
+            <td>
+              <%= form_with model: @order, method: :patch do |f| %>
+                <%= f.select :status, Oder.statuses.keys %>
+            </td>
+            <td>
+                <%= f.submit '更新', class: "btn btn-success btn-lg" %>
+            </td>
+              <% end %>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     </div>
   </div>
   
   <div class="row">
-    <div class="col-sm-12">
+    <div class="col-sm-8">
+    <% @order_details.each do |order_detail| %>
       <table class="table">
         <thead>
           <tr>
-            <th scope="col", class="table-info">購入日時</th>
+            <th scope="col", class="table-info">商品名</th>
+            <th scope="col", class="table-info">単価(税込)</th>
+            <th scope="col", class="table-info">数量</th>
+            <th scope="col", class="table-info">小計</th>
+            <th scope="col", class="table-info">製作ステータス</th>
             <th scope="col", class="table-info"></th>
-            <th scope="col", class="table-info"></th>
-            <th scope="col", class="table-info">注文個数</th>
-            <th scope="col", class="table-info">注文ステータス</th>
           </tr>
         </thead>
         <tbody>
         
           <tr>
-            <td><%= order.created_at.strftime('%Y/%m/%d') %></td>
-            <td></td>
-            <td></td>
-            <td><%= order.order_details.amount %></td>
+            <td><%= order_detail.item.name %></td>
+            <td><%= order_detail.price %></td>
+            <td><%= order_detail.amount %></td>
+            <td><%= order_details.amount*order_details.price %></td>
             <td class="text-success font-weight-bold">
-              <%= order.order_status %>
+              <%= form_with model: order_detail, method: :patch do |f| %>
+                <%= f.select :making_status, OrderDetail.making_status.keys, {}, class: "col-7" %>
+            <td>
+                <%= f.submit '更新', class: "btn btn-success btn-lg" %>
+            </td>
+              <% end %>
             </td>
           </tr>
-        <% end %>
         </tbody>
-        <%= paginate @orders %>
+      </table>
+    <% end %>
+    </div>
+    <div class="col-sm-4">
+      <table>
+        <tr>
+          <td>
+            商品合計
+          </td>
+          <td>
+            
+          </td>
+        </tr>
+        <tr>
+          <td>
+            送料
+          </td>
+          <td>
+            
+          </td>
+        </tr>
+        <tr>
+          <td>
+            請求金額合計
+          </td>
+          <td>
+            
+          </td>
+        </tr>
       </table>
     </div>
-  </div>
 </div>

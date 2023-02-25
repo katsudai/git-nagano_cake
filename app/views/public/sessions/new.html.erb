@@ -1,26 +1,58 @@
-<h2>Log in</h2>
-
-<%= form_with model: Customer.new, url: customer_session_path do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+<p id="notice"></p>
+<div class="container">
+  <div class="row">
+    <div class="col-4"></div>
+    <div class="col-4 alert alert-info mb-3 text-center" role="alert">
+      <h6>会員の方はこちらからログイン</h6>
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
   </div>
-<% end %>
+  
+  <div class="row">
+    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto text-center shadow-lg rounded px-0 my-3">
+      
+      <div class="alert alert-info mb-3" role="alert">
+        <h3>ログイン</h3>
+      </div>
+      
+      <div class="form-body p-4">
+        <%= form_with model: @customer, url: customer_session_path do |f| %>
+          <div class="input-group flex-nowrap my-4">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><%= f.label :email %></span>
+            </div>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control form-control-lg" %>
+          </div>
+        
+          <div class="input-group flex-nowrap my-4">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><%= f.label :password %></span>
+            </div>
+            <%= f.password_field :password, autocomplete: "current-password", class: "form-control form-control-lg" %>
+          </div>
+        
+          <% if devise_mapping.rememberable? %>
+            <div class="input-group flex-nowrap my-4">
+              <%= f.check_box :remember_me %>
+              <%= f.label :remember_me %>
+            </div>
+          <% end %>
+        
+          <div class="input-group flex-nowrap my-4">
+            <%= f.submit "ログイン", class: "btn btn-success" %>
+          </div>
+        <% end %>
+        
+        <% render "public/shared/links" %>
+      </div>
+    </div>  
+  </div>
+  <div class="col-4 alert alert-info mb-3 text-center my-3" role="alert">
+    <h6>会員がお済でない方</h6>
+  </div>
+  <p>
+    <%= link_to "こちら", new_customer_registration_path %>
+    から新規登録を行ってください。
+  </p>
+</div>
 
-<%= render "public/shared/links" %>
+
