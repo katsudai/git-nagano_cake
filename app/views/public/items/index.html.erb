@@ -1,2 +1,34 @@
-<h1>Public::Items#index</h1>
-<p>Find me in app/views/public/items/index.html.erb</p>
+<p id="notice"></p>
+<div class="container">
+  <div class="row pt-4">
+    <h1>商品一覧(全<%= @items.count %>件)</h1>
+  </div>
+  
+  <div class="row">
+    <% @items.each do |item| %>
+    <div class="col-md-6 col-lg-3 p-2 border-bottom border-info font-weight-bold">
+      <%= link_to item_path(item.id) ,style: "color: black;", data: {"turbolinks" => false} do %>
+        <% if item.image.attached? %>
+      　<%= image_tag item.image, size: "200x200" %>
+    　　<% else %>
+    　　<%= image_tag 'no_image', size: "200x200" %>
+    　　<% end %>
+    　<% end %>
+    　<div>
+    　　<%= item.name %>
+    　</div>
+    　<div>
+  　　    <%= item.price %>円
+  　　</div>
+    </div>
+    <% end %>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-6"></div>
+    <div class="col-2 pt-2 link-dark">
+      <p class="font-weight-bold"><%= paginate @items %></p>
+    </div>
+  </div>
+</div>

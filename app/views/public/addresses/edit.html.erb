@@ -1,2 +1,37 @@
-<h1>Public::Addresses#edit</h1>
-<p>Find me in app/views/public/addresses/edit.html.erb</p>
+<p id="notice"></p>
+<div class="container">
+  <div class="row">
+    <div class="cocl-6 alert alert-info mb-3 mx-auto text-center" role="alert">
+      <h4>配送先編集</h4>
+    </div>
+    <div class="col-sm-12 col-md-8 col-lg-12 mt-4 mx-auto">
+      
+      <%= form_with model: @address, url: address_path, method: :PATCH do |f| %>
+      <div class="form-body py-4">
+        <div class="input-group flex-nowrap mb-4">
+          <label class="form-label mb-0 col-5 text-center">郵便番号(ハイフンなし)</label>
+          <span class="input-group-text"><i class="fas fa-plus"></i></span>
+          <%= f.text_field :postal_code, autofocus: true, autocomplete: "postal_code", placeholder: "0000000", class: "col-3" %>
+        </div>
+        
+        <div class="input-group flex-nowrap mb-4">
+          <label class="form-label mb-0 col-5 text-center">住所</label>
+          <span class="input-group-text"><i class="fas fa-plus"></i></span>
+          <%= f.text_field :addresses, autofocus: true, autocomplete: "address", placeholder: "東京都渋谷区代々木神園町0-0", class: "col-6" %>
+        </div>
+        
+        <div class="input-group flex-nowrap mb-4">
+          <label class="form-label mb-0 col-5 text-center">宛名</label>
+          <span class="input-group-text"><i class="fas fa-plus"></i></span>
+          <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "令和道子", class: "col-3" %>
+        </div>
+        
+      </div>
+      <div class="text-center pr-4">
+        <%= f.submit "新規登録", class: "btn btn-success btn-lg" %>
+      </div>
+
+      <% end %>
+    </div>  
+  </div>
+</div>

@@ -1,2 +1,62 @@
-<h1>Public::Customers#show</h1>
-<p>Find me in app/views/public/customers/show.html.erb</p>
+<div class="container">
+
+  <div class="row">
+    <div class="alert alert-info my-3" role="alert">
+      <h3>マイページ</h3>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-sm-3 text-right font-weight-bold">
+      <span class="pr-4">登録情報</span>
+      <span class=""><%= link_to "編集する", customers_infomation_edit_path, class: "btn btn-success btn-lg" %></span>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-sm-8 mt-4 text-center">
+      <table class="table table-bordered">
+        <tbody>
+          <tr>
+            <td class="table-secondary">氏名</td>
+            <td><%= @customer.last_name %><%= @customer.first_name %></td>
+          </tr>
+          <tr>
+            <td class="table-secondary">カナ</td>
+            <td><%= @customer.last_name_kana %><%= @customer.first_name_kana %></td>
+          </tr>
+          <tr>
+            <td class="table-secondary">郵便番号</td>
+            <td><%= @customer.postal_code %></td>
+          </tr>
+          <tr>
+            <td class="table-secondary">住所</td>
+            <td><%= @customer.address %></td>
+          </tr>
+          <tr>
+            <td class="table-secondary">電話番号</td>
+            <td><%= @customer.telephone_number %></td>
+          </tr>
+          <tr>
+            <td class="table-secondary">メールアドレス</td>
+            <td><%= @customer.email %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-sm-3 text-right my-3 font-weight-bold">
+      <span class="pr-4">配送先</span>
+      <span class=""><%= link_to "一覧を見る", addresses_path, class: "btn btn-primary btn-lg" %></span>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-sm-3 text-right font-weight-bold">
+      <span class="pr-4">注文履歴</span>
+      <span class=""><%= link_to "一覧を見る", orders_path, class: "btn btn-primary btn-lg" %></span>
+    </div>
+  </div>
+</div>

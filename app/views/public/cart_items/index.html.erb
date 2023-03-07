@@ -1,2 +1,67 @@
-<h1>Public::CartItems#index</h1>
-<p>Find me in app/views/public/cart_items/index.html.erb</p>
+<p id="notice"></p>
+<div class="container">
+  <div class="row">
+    <div class="col-3 alert alert-info mb-3 mx-auto text-center" role="alert">
+      <h4>ショッピングカート</h4>
+    </div>
+    <div class="col-3 mx-auto text-center" role="alert">
+      <%= link_to "カートを空にする", cart_items_all_destroy_path, method: :delete, class: "btn btn-danger mt-4" %>
+    </div>
+    <div><%= flash[:notice] %></div>
+    <div class="col-sm-12 col-md-8 col-lg-12 pt-5 mx-auto text-center font-weight-bold">
+      <table class="table table-bordered border-info">
+        <thead>
+          <tr>
+            <th class="col-1 table-secondary"></th>
+            <th class="col-3 table-secondary">商品名</th>
+            <th class="col-2 table-secondary">単価(税込)</th>
+            <th class="col-2 table-secondary">数量</th>
+            <th class="col-2 table-secondary">小計</th>
+            <th class="col-2 table-secondary"></th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @sum = 0 %>
+        <% @cart_items.each do |cart_item| %>
+          <tr>
+            <td>
+              <span><%= image_tag cart_item.item.image, size: "40x40" %></span>
+            </td>
+            <td>
+              <span><%= cart_item.item.name %></span>
+            </td>
+            <td><%= cart_item.item.with_tax_price %></td>
+            <td>
+              <%= form_with model: cart_item, url: cart_item_path(cart_item.id), method: :PATCH do |f| %>
+                <span class="p-2"><%= f.select :amount, { "1個": 1, "2個": 2, "3個": 3, "4個": 4, "5個": 5, "6個": 6, "7個": 7, "8個": 8, "9個": 9}, prompt: "個数選択", class: "form-control" %></span>
+                <%= f.submit "変更する", class: "btn btn-success" %>
+              <% end %>
+            </td>
+            <td><%= cart_item.subtotal %></td>
+            <td>
+              <%= link_to "削除する", cart_item_path(cart_item.id), method: :DELETE, class: "btn btn-danger" %>
+            </td>
+            <% @sum += cart_item.subtotal %>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-3 mx-auto text-center mt-4" role="alert">
+      <%= link_to "買い物を続ける", items_path, class: "btn btn-primary" %>
+    </div>
+    <div class="col-sm-12 col-md-8 col-lg-4 mt-4 mx-auto font-weight-bold">
+      <table class="table table-bordered border-info">
+        <tr class="text-center">
+          <td class="col-3 table-secondary">合計金額</td>
+          <td class="col-3">
+            <%= @sum %>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="text-center p-5">
+    <%= link_to "情報入力に進む", new_order_path, class: "btn btn-success btn-lg" %>
+  </div>
+</div>
