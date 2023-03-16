@@ -15,19 +15,21 @@
       <h1><%= @item.name %></h1>
       <h3><%= @item.introduction %></h3>
       <h3><%= @item.with_tax_price %>円(税込)</h3>
-      <div class="pt-4">
-        <%= form_with model: @cart_item, url: cart_items_path, method: :POST do |f| %>
-        <span>
-          <%= f.hidden_field :item_id, value: @item.id %>
-        </span>
-        <span class="pr-4">
-          <%= f.select :amount, { "1個": 1, "2個": 2, "3個": 3, "4個": 4, "5個": 5, "6個": 6, "7個": 7, "8個": 8, "9個": 9},prompt: "個数選択" %>
-        </span>
-        <span class="">
-          <%= f.submit "カートに入れる", class: "btn btn-success btn-lg" %>
-        </span>
-        <% end %>
-      </div>
+      <% if customer_signed_in? %>
+        <div class="pt-4">
+          <%= form_with model: @cart_item, url: cart_items_path, method: :POST do |f| %>
+          <span>
+            <%= f.hidden_field :item_id, value: @item.id %>
+          </span>
+          <span class="pr-4">
+            <%= f.select :amount, { "1個": 1, "2個": 2, "3個": 3, "4個": 4, "5個": 5, "6個": 6, "7個": 7, "8個": 8, "9個": 9}, included_brank: "個数選択" %>
+          </span>
+          <span class="">
+            <%= f.submit "カートに入れる", class: "btn btn-success btn-lg" %>
+          </span>
+          <% end %>
+        </div>
+      <% end %>
     </div>
     
   </div>

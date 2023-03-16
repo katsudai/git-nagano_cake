@@ -4,7 +4,6 @@
     <div class="col-3 alert alert-info mb-3 mx-auto text-center" role="alert">
       <h4>注文情報確認</h4>
     </div>
-    <div><%= flash[:notice] %></div>
   </div>
   <div class="row">
     <div class="col-sm-12 col-md-8 col-lg-9 pt-5 mx-auto text-center font-weight-bold">
@@ -81,6 +80,7 @@
       <%= f.hidden_field :postal_code, value: @order.postal_code %>
       <%= f.hidden_field :address, value: @order.address %>
       <%= f.hidden_field :name, value: @order.name %>
+      <%= f.hidden_field :shipping_cost, value: @shipping_cost %>
       <%= f.hidden_field :total_payment, value: @shipping_cost + @sum %>
       <%= f.submit "注文を確定する", class: "btn btn-success" %>
     <% end %>

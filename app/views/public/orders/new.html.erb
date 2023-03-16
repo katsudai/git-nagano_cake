@@ -34,7 +34,7 @@
     </div>
     <div class="row p-2">
       <div class="">
-        <%= f.radio_button :select_address, 0 %>
+        <%= f.radio_button :select_address, 0, checked: true %>
         <span>ご自身の住所</span>
         <div class="ml-4">〒<%= @customer.postal_code.to_s %></div>
         <div class="ml-4"><%= @customer.address %></div>

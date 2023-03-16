@@ -1,7 +1,11 @@
 class Public::OrdersController < ApplicationController
+  
+  before_action :authenticate_customer!
+  
   def new
     if current_customer.cart_items.blank?
-      redirect_to itens_path, alert: "カートに商品を入れてください"
+      flash[:notice] = "カートに商品を入れてください"
+      redirect_to cart_items_path
     else
       @order = Order.new
       @customer = current_customer
@@ -9,10 +13,12 @@ class Public::OrdersController < ApplicationController
   end
 
   def index
-    @orders = current_customer.orders
+    @orders = current_customer.orders.page(params[:page])
   end
 
   def show
+    @order = Order.find(params[:id])
+    
   end
 
   def confirm
@@ -38,8 +44,13 @@ class Public::OrdersController < ApplicationController
 
     elsif params[:order][:select_address] == "2"
       
-      @order = Order.new(order_params)
-      
+      if params[:order][:postal_code] == "" ||  params[:order][:address] == "" ||  params[:order][:name] == ""
+        @customer = current_customer
+        flash[:notice] = "住所を入力してください"
+        render :new
+      else
+        @order = Order.new(order_params)
+      end
     end
     
   end
@@ -47,12 +58,15 @@ class Public::OrdersController < ApplicationController
   def create
     @cart_items = current_customer.cart_items
     @order = current_customer.orders.new(order_params)
-    @order.save
-    @cart_items.each do |cart_item|
-    @order_detail = OrderDetail.new(making_status: 0, price: cart_item.item.price, amount: cart_item.amount, item_id: cart_item.item_id, order_id: @order.id)
-    @order_detail.save
-    end
-    redirect_to orders_complete_path
+       @order.save
+    
+      @cart_items.each do |cart_item|
+        @order_detail = OrderDetail.new(making_status: 0, price: cart_item.item.price, amount: cart_item.amount, item_id: cart_item.item_id, order_id: @order.id)
+        @order_detail.save
+      end
+      @cart_items.destroy_all
+      redirect_to orders_complete_path
+    
   end
 
   def complete

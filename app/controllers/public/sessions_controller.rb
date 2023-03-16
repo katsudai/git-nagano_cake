@@ -23,8 +23,9 @@ class Public::SessionsController < Devise::SessionsController
   def customer_state
     @customer = Customer.find_by(email: params[:customer][:email])
     return if !@customer
-    if @customer.valid_password?(params[:customer][:password]) && :is_deleted == true
-    redirect_to new_customer_registration_pass
+    if @customer.valid_password?(params[:customer][:password]) && @customer.is_deleted == true
+    flash[:notice] = "退会済みのため再登録が必要となります。"
+    redirect_to new_customer_registration_path
     end
   end
   # If you have extra params to permit, append them to the sanitizer.

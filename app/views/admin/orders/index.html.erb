@@ -22,16 +22,18 @@
         <tbody>
         <% @orders.each do |order| %>
           <tr>
-            <td><%= order.created_at.strftime('%Y/%m/%d') %></td>
+            <td><%= link_to order.created_at.strftime('%Y/%m/%d %H:%M'), admin_order_path(order.id), class: "text-decoration-none text-dark border-bottom border-dark" %></td>
             <td>
-              <%= link_to order.customer.last_name, admin_customer_path(customer), class: "text-decoration-none text-dark border-bottom border-dark" %>
-              <%= link_to order.customer.first_name, admin_customer_path(customer), class: "text-decoration-none text-dark border-bottom border-dark" %>
+              <%= order.customer.last_name %>
+              <%= order.customer.first_name %>
             </td>
             <td></td>
             <td></td>
-            <td><%= order.order_details.amount %></td>
+            <td>
+              <%= order.order_details.all.sum(:amount) %>
+              </td>
             <td class="text-success font-weight-bold">
-              <%= order.order_status %>
+              <%= order.status_i18n %>
             </td>
           </tr>
         <% end %>
